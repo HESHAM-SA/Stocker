@@ -200,3 +200,4 @@ As an Inventory Manager, I want to export inventory data to CSV files so that I 
 ## UML design tools
 - https://www.lucidchart.com/pages/examples/uml_diagram_tool
 - https://app.diagrams.net/
+-
