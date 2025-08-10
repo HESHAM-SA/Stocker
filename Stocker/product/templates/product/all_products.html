@@ -4,14 +4,22 @@
 
 {% block content %}
 
-<form action="{% url 'product:product_list_view' %}" method="get">
-    <input type="search" name="search" value="{{search_query}}">
-</form>
+<div class="row">
+    <div class="col">
+        <form action="{% url 'product:product_list_view' %}" method="get">
+            <input type="search" name="search" value="{{search_query}}">
+        </form>
+    </div>
+    <div class="col"><a href="{% url 'product:add_new_product' %}">Add New Product</a></div>
+</div>
+
 
 {# here add prodcut card #}
-{% for product in all_products %}
+{% for product in products %}
     <ul>
-        <li>{{product}}</li>
+        <li><a href="{% url 'product:show_product_details' product.id %}">{{product.product_name}}</a></li>
+        <a href="{% url 'product:delete_product' product.id %}">Delete</a>
+        <a href="{% url 'product:update_product' product.id %}">Update</a>
     </ul>
 {% empty %}
     <p>No product found</p>

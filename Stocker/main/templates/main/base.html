@@ -11,13 +11,20 @@
     <body class="container d-flex flex-column justify-content-between min-vh-100">
         <header>
             <nav class="d-flex justify-content-between">
-                <div><a href="#">LOGO</a></div>
+                <div><a href="{% url 'main:home_view' %}">LOGO</a></div>
                 <ul class="d-flex list-unstyled gap-4">
-                    <li><a href="#">Prodects</a></li>
+                    <li><a href="{% url 'product:product_list_view' %}">Prodects</a></li>
                     <li><a href="#">Categorys</a></li>
                     <li><a href="#">Suppliers</a></li>
+                    <li><a href="{% url 'account:login_view' %}">Log in</a></li>
+                    <li><a href="{% url 'account:logout_view' %}">Log out</a></li>
                 </ul>
             </nav>
+            {% if messages %}
+                {% for msg in messages %}
+                    {{msg}}
+                {% endfor %}
+            {% endif %}
         </header>
         <main class="flex-grow-1">
             {% block content %}

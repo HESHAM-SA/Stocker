@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Register User {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'account:register_view' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Register</button>
+</form>
+
+{% endblock %}

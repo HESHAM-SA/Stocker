@@ -4,25 +4,26 @@ from django.db import models
 
 
 class Supplier(models.Model):
-    name = models.CharField(max_length=100)
+    supplier_name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='supplier_logos/', default='supplier_logos/default_logo.svg', null=True, blank=True )
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=20, unique=True)
     website = models.URLField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.supplier_name
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    category_name = models.CharField(max_length=100, unique=True)
+
 
     def __str__(self):
-        return self.name
+        return self.category_name
 
 class Product(models.Model):
+    product_name = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     suppliers = models.ManyToManyField(Supplier)
-    name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     expire_date = models.DateField(blank=True, null=True)
     stock_quantity = models.PositiveIntegerField(default=0)
@@ -30,4 +31,4 @@ class Product(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.product_name

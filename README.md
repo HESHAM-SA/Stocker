@@ -137,7 +137,7 @@ As an Inventory Manager, I want to export inventory data to CSV files so that I 
 ### UML: 
 - ![UML image](assets/UML.png)
 ### Wireframe:
-[WireFrame](assets/WireFrame.png)
+[WireFrame image](assets/WireFrame.png)
 
 ## Note:
 - use best practices.
@@ -202,4 +202,3 @@ As an Inventory Manager, I want to export inventory data to CSV files so that I 
 ## UML design tools
 - https://www.lucidchart.com/pages/examples/uml_diagram_tool
 - https://app.diagrams.net/
--
