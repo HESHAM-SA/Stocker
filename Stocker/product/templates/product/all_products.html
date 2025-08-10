@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %} All Products {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'product:product_list_view' %}" method="get">
+    <input type="search" name="search" value="{{search_query}}">
+</form>
+
+{# here add prodcut card #}
+{% for product in all_products %}
+    <ul>
+        <li>{{product}}</li>
+    </ul>
+{% empty %}
+    <p>No product found</p>
+{% endfor %}
+
+{% endblock %}
