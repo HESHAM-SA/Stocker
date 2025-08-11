@@ -26,11 +26,15 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <!-- Corrected typo -->
                             <a class="nav-link" href="{% url 'product:product_list_view' %}">Products</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Suppliers</a></li>
+                        <!-- UPDATED LINKS -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'product:category_list_view' %}">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'product:supplier_list_view' %}">Suppliers</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         {% if user.is_authenticated %}

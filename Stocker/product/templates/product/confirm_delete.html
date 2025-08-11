@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="col-md-6 mx-auto">
+    <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+            <h3>Confirm Deletion</h3>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete the {{ object_type|lower }} "<strong>{{ object }}</strong>"?</p>
+            <p class="text-danger">This action cannot be undone.</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

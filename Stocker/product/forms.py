@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product
+from .models import Product, Category, Supplier
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -56,4 +56,25 @@ class ProductForm(forms.ModelForm):
         help_texts = {
             'suppliers': 'You can select multiple suppliers by holding Ctrl (or Cmd on Mac) and clicking.',
             'expire_date': 'Leave blank if the product does not expire.',
+        }
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = '__all__'
+        widgets = {
+            'category_name': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ['supplier_name', 'logo', 'email', 'phone_number', 'website']
+        widgets = {
+            'supplier_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'logo': forms.FileInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'website': forms.URLInput(attrs={'class': 'form-control'}),
         }
