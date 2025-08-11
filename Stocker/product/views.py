@@ -4,16 +4,17 @@ from .models import Product, Category
 from django.db.models import Q
 from .forms import ProductForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
+@login_required 
 def product_list_view(request: HttpRequest) -> HttpResponse:
     """--- here search and disply all products ---"""
     search_query = request.GET.get('search', '')
     products = Product.objects.all()
     if search_query:
-        products = Product.objects.filter(name__icontains=search_query)
+        products = Product.objects.filter(product_name__icontains=search_query)
 
     context = {'products':products, 'search_query':search_query}
     return render(request, 'product/all_products.html',context)

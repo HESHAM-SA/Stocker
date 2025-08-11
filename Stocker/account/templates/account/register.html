@@ -6,7 +6,11 @@
 
 <form action="{% url 'account:register_view' %}" method="post">
     {% csrf_token %}
-    {{form.as_p}}
+    <div class="form-floating">
+        <input type="text" name="username" placeholder="User Name">
+        <input type="email" name="email" placeholder="email">
+        <input type="password" name="password" placeholder="Password">
+    </div>
     <button type="submit">Register</button>
 </form>
 

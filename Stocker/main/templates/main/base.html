@@ -16,8 +16,15 @@
                     <li><a href="{% url 'product:product_list_view' %}">Prodects</a></li>
                     <li><a href="#">Categorys</a></li>
                     <li><a href="#">Suppliers</a></li>
-                    <li><a href="{% url 'account:login_view' %}">Log in</a></li>
-                    <li><a href="{% url 'account:logout_view' %}">Log out</a></li>
+                    <li>
+                        {% if not request.user.is_authenticated %}
+                        <a href="{% url 'account:login_view' %}">Log in/ </a>
+                        <a href="{% url 'account:register_view' %}">SignUp</a>
+                        {% else %}
+                        <a href="#">{{request.user.username}}</a>
+                        {% endif %}
+                    </li>
+                        <li><a href="{% url 'account:logout_view' %}">Log out</a></li>
                 </ul>
             </nav>
             {% if messages %}
