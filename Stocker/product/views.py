@@ -15,7 +15,6 @@ def product_list_view(request: HttpRequest) -> HttpResponse:
     products = Product.objects.all()
     if search_query:
         products = Product.objects.filter(product_name__icontains=search_query)
-
     context = {'products':products, 'search_query':search_query}
     return render(request, 'product/all_products.html',context)
 

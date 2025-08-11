@@ -18,8 +18,16 @@
 {% for product in products %}
     <ul>
         <li><a href="{% url 'product:show_product_details' product.id %}">{{product.product_name}}</a></li>
-        <a href="{% url 'product:delete_product' product.id %}">Delete</a>
-        <a href="{% url 'product:update_product' product.id %}">Update</a>
+        <li><p>Stock Quantity: {{product.stock_quantity}}</p></li>
+        {% if product.stock_quantity < 2 %}
+            <p class="bg-danger">Low Stock</p>
+        {% endif %}
+        {% if perms.product.delete_product %}
+            <a href="{% url 'product:delete_product' product.id %}">Delete</a>
+        {% endif %}
+        {% if perms.product.change_product %}
+            <a href="{% url 'product:update_product' product.id %}">Update</a>
+        {% endif %}
     </ul>
 {% empty %}
     <p>No product found</p>
