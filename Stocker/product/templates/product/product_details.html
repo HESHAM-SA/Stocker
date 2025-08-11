@@ -1,11 +1,37 @@
 {% extends 'main/base.html' %}
-
 {% block title %} Product Details {% endblock %}
 
 {% block content %}
-
-
-   <h1>{{product.product_name}}</h1>
-   <p>{{product.description}}</p>
-    
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">{{ product.product_name }}</h1>
+        {% if perms.product.change_product %}
+            <a href="{% url 'product:update_product' product.id %}" class="btn btn-primary">Edit Product</a>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Description</h5>
+        <p class="card-text">{{ product.description|linebreaksbr|default:"No description provided." }}</p>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Category:</strong> {{ product.category.category_name }}</p>
+                <p><strong>Stock Quantity:</strong> {{ product.stock_quantity }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Expiry Date:</strong> {{ product.expire_date|default:"N/A" }}</p>
+                <p><strong>Suppliers:</strong>
+                    {% for supplier in product.suppliers.all %}
+                        {{ supplier.supplier_name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        No suppliers listed.
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        Added on: {{ product.created_at }}
+    </div>
+</div>
 {% endblock %}
