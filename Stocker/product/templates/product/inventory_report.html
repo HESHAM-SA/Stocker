@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+{% block title %}Inventory Report{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Inventory Report</h1>
+
+<!-- Summary Cards -->
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card text-white bg-primary h-100">
+            <div class="card-body">
+                <h5 class="card-title">Total Unique Products</h5>
+                <p class="card-text fs-2 fw-bold">{{ total_products }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card text-white bg-success h-100">
+            <div class="card-body">
+                <h5 class="card-title">Total Items in Stock</h5>
+                <p class="card-text fs-2 fw-bold">{{ total_stock_items }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Lists -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Low Stock Items (10 or less)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for product in low_stock_products %}
+                    <li class="list-group-item">{{ product.product_name }} ({{ product.stock_quantity }})</li>
+                {% empty %}
+                    <li class="list-group-item">No items are low on stock.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Out of Stock Items</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for product in out_of_stock_products %}
+                    <li class="list-group-item">{{ product.product_name }}</li>
+                {% empty %}
+                    <li class="list-group-item">No items are out of stock.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

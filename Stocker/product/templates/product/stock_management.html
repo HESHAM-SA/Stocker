@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+{% block title %}Stock Management{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Stock Management</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th class="text-center">Current Stock</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.product_name }}</td>
+                        <td class="text-center">
+                            {% if product.stock_quantity == 0 %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% elif product.stock_quantity <= 10 %}
+                                <span class="badge bg-warning text-dark">{{ product.stock_quantity }}</span>
+                            {% else %}
+                                <span class="badge bg-success">{{ product.stock_quantity }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <!-- Each set of buttons is a tiny form -->
+                            <form action="{% url 'product:stock_management_view' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="hidden" name="action" value="decrease">
+                                <button type="submit" class="btn btn-sm btn-warning fw-bold">-</button>
+                            </form>
+                            <form action="{% url 'product:stock_management_view' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="hidden" name="action" value="increase">
+                                <button type="submit" class="btn btn-sm btn-success fw-bold">+</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

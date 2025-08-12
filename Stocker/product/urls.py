@@ -22,4 +22,9 @@ urlpatterns = [
     path("supplier/details/<int:supplier_id>", views.show_supplier_details, name='show_supplier_details'),
     path("supplier/update/<int:supplier_id>", views.update_supplier, name='update_supplier'),
     path("supplier/delete/<int:supplier_id>", views.delete_supplier, name='delete_supplier'),
+
+    # ... stock 
+    path("stock-management/", views.stock_management_view, name='stock_management_view'),
+    # ... inventory 
+    path("reports/inventory/", views.inventory_report_view, name='inventory_report_view'),
 ]
